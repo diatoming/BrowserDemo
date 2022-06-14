@@ -12,6 +12,9 @@ struct BrowserDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .edgesIgnoringSafeArea(.all)
         }
+        .windowToolbarStyle(.unified)
+        .windowStyle(.hiddenTitleBar)
     }
 }
