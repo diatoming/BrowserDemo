@@ -36,32 +36,68 @@ struct BrowserWebView: NSViewRepresentable {
 }
 
 extension BrowserWebView {
-    class BrowserWebViewCoordinator: NSObject, WKNavigationDelegate {
-        
+    class BrowserWebViewCoordinator: NSObject, WKNavigationDelegate, WKDownloadDelegate {
+                
         var parent: BrowserWebView
-        
-        var changed = false
+        private var downloadDestinationURL: URL?
         
         init(_ webView: BrowserWebView) {
             self.parent = webView
         }
         
-        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            if let url = navigationAction.request.url?.absoluteString {
-                
-                dump(url)
-                
+        // MARK: - Download
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+            if navigationAction.shouldPerformDownload {
+                   decisionHandler(.download, preferences)
+               } else {
+                   decisionHandler(.allow, preferences)
+               }
+        }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+            if navigationResponse.canShowMIMEType {
                 decisionHandler(.allow)
-                return
+            } else {
+                decisionHandler(.download)
             }
-            
-            
+        }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            dump(navigationAction.request.url)
             decisionHandler(.allow)
         }
         
+        func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
+            download.delegate = self
+        }
+        
+        func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
+            download.delegate = self
+        }
+        
+        func download(_ download: WKDownload, decideDestinationUsing response: URLResponse, suggestedFilename: String) async -> URL? {
+            let temporaryDir = NSTemporaryDirectory()
+            let fileName = temporaryDir + "/" + suggestedFilename
+            let url = URL(fileURLWithPath: fileName)
+            downloadDestinationURL = url
+            return downloadDestinationURL
+        }
+        
+        func download(_ download: WKDownload, didFailWithError error: Error, resumeData: Data?) {
+            assertionFailure(error.localizedDescription)
+        }
+        
+        func downloadDidFinish(_ download: WKDownload) {
+            if let url = downloadDestinationURL {
+                dump(url)
+            }
+            downloadDestinationURL = nil
+        }
+        
+        // MARK: - Navigation
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             
-            if let url = webView.url, url.absoluteString.contains("addons.mozilla.org") {
+            if let url = webView.url, url.absoluteString.isFirefoxAddonsSite {
                 let js = """
                 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
                 remove(".GetFirefoxButton");
@@ -77,5 +113,16 @@ extension BrowserWebView {
                 }
             }
         }
+        
+        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+//            assertionFailure(error.localizedDescription)
+        }
+        
+    }
+}
+
+extension String {
+    var isFirefoxAddonsSite: Bool {
+        contains("addons.mozilla.org")
     }
 }
