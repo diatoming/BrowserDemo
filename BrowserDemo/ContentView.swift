@@ -30,7 +30,7 @@ struct ContentView: View {
             Spacer()
         }
         .onAppear {
-            refreshUrl()
+            refreshUrl()            
         }
     }
     
