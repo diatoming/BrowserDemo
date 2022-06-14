@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var urlString = ""
+    @State private var urlString = "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/"
+    @State private var url: URL?
     
     var body: some View {
         VStack {
+            BrowserWebView(url: $url)
         }
-        .padding()
         .frame(idealWidth: 800, maxWidth: .infinity, idealHeight: 680, maxHeight: .infinity)
         .presentedWindowToolbarStyle(.expanded)
         .toolbar {
@@ -23,10 +24,17 @@ struct ContentView: View {
                 .frame(minWidth: 500)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit {
-                    
+                    refreshUrl()
                 }
             
             Spacer()
         }
+        .onAppear {
+            refreshUrl()
+        }
+    }
+    
+    private func refreshUrl() {
+        url = URL(string: urlString)
     }
 }
