@@ -12,6 +12,12 @@ class TopSitesManager {
     
     private(set) var sitesInfo: [String: Int] = [:]
     
+    var topSites: [String] {
+        sitesInfo.sorted { left, right in
+            left.value > right.value
+        }.map(\.key)
+    }
+    
     func update(site: String) {
         if let score = sitesInfo[site] {
             sitesInfo[site] = score + 1
@@ -23,8 +29,6 @@ class TopSitesManager {
     func load() {
         guard let data = UserDefaults.standard.value(forKey: .topSitesInfo) as? Data else { return }
         sitesInfo = try! JSONDecoder().decode([String: Int].self, from: data)
-        
-        dump(sitesInfo)
     }
     
     func save() {

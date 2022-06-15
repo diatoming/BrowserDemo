@@ -14,6 +14,8 @@ struct ContentView: View {
     
     @State private var plugin: FirefoxPlugin?
     
+    @State private var showTopSitesPopover = false
+    
     var body: some View {
         VStack {
             BrowserWebView(url: $url)
@@ -35,11 +37,25 @@ struct ContentView: View {
                 
                 if let plugin = plugin {
                     Button {
-                        
+                        if plugin.manifest?.name == "Top Sites Button" {
+                            showTopSitesPopover.toggle()
+                        }
                     } label: {
                         plugin.iconImage
                             .resizable().aspectRatio(contentMode: .fit)
                             .help(plugin.manifest?.name ?? "Some Plugin")
+                    }
+                    .popover(isPresented: $showTopSitesPopover, arrowEdge: .bottom) {
+                        List {
+                            ForEach(TopSitesManager.shared.topSites, id: \.self) { site in
+                                HStack {
+                                    Text(site)
+                                    Spacer(minLength: 0)
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .frame(width: 400, height: 320)
                     }
                 }
             }
@@ -53,6 +69,7 @@ struct ContentView: View {
             }
             self.plugin = plugin
         }
+        
     }
     
     private func refreshUrl() {
