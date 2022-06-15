@@ -12,6 +12,8 @@
 		1F629EB4285842670040DE61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F629EB3285842670040DE61 /* Assets.xcassets */; };
 		1F629EB7285842670040DE61 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F629EB6285842670040DE61 /* Preview Assets.xcassets */; };
 		1F629EBF285849130040DE61 /* BrowserWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EBE285849130040DE61 /* BrowserWebView.swift */; };
+		1F629EC1285954230040DE61 /* FirefoxPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EC0285954230040DE61 /* FirefoxPlugin.swift */; };
+		1F629EC4285965150040DE61 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F629EC3285965150040DE61 /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		1F629EB6285842670040DE61 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F629EB8285842670040DE61 /* BrowserDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserDemo.entitlements; sourceTree = "<group>"; };
 		1F629EBE285849130040DE61 /* BrowserWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserWebView.swift; sourceTree = "<group>"; };
+		1F629EC0285954230040DE61 /* FirefoxPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirefoxPlugin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F629EC4285965150040DE61 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				1F629EAF285842660040DE61 /* BrowserDemoApp.swift */,
 				1F629EB1285842660040DE61 /* ContentView.swift */,
 				1F629EBE285849130040DE61 /* BrowserWebView.swift */,
+				1F629EC0285954230040DE61 /* FirefoxPlugin.swift */,
 				1F629EB3285842670040DE61 /* Assets.xcassets */,
 				1F629EB8285842670040DE61 /* BrowserDemo.entitlements */,
 				1F629EB5285842670040DE61 /* Preview Content */,
@@ -88,6 +93,9 @@
 			dependencies = (
 			);
 			name = BrowserDemo;
+			packageProductDependencies = (
+				1F629EC3285965150040DE61 /* ZIPFoundation */,
+			);
 			productName = BrowserDemo;
 			productReference = 1F629EAC285842660040DE61 /* BrowserDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +124,9 @@
 				Base,
 			);
 			mainGroup = 1F629EA3285842660040DE61;
+			packageReferences = (
+				1F629EC2285965150040DE61 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			productRefGroup = 1F629EAD285842660040DE61 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F629EB2285842660040DE61 /* ContentView.swift in Sources */,
+				1F629EC1285954230040DE61 /* FirefoxPlugin.swift in Sources */,
 				1F629EBF285849130040DE61 /* BrowserWebView.swift in Sources */,
 				1F629EB0285842660040DE61 /* BrowserDemoApp.swift in Sources */,
 			);
@@ -342,6 +354,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1F629EC2285965150040DE61 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1F629EC3285965150040DE61 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F629EC2285965150040DE61 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1F629EA4285842660040DE61 /* Project object */;
 }

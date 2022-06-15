@@ -62,11 +62,6 @@ extension BrowserWebView {
             }
         }
         
-        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            dump(navigationAction.request.url)
-            decisionHandler(.allow)
-        }
-        
         func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
             download.delegate = self
         }
@@ -77,19 +72,31 @@ extension BrowserWebView {
         
         func download(_ download: WKDownload, decideDestinationUsing response: URLResponse, suggestedFilename: String) async -> URL? {
             let temporaryDir = NSTemporaryDirectory()
-            let fileName = temporaryDir + "/" + suggestedFilename
+            let fileName = temporaryDir + suggestedFilename
             let url = URL(fileURLWithPath: fileName)
             downloadDestinationURL = url
+            
+            // remove old download is needed
+            try! FileManager.default.removeItem(at: url)
+            
             return downloadDestinationURL
         }
         
         func download(_ download: WKDownload, didFailWithError error: Error, resumeData: Data?) {
+            dump(downloadDestinationURL)
             assertionFailure(error.localizedDescription)
         }
         
         func downloadDidFinish(_ download: WKDownload) {
             if let url = downloadDestinationURL {
                 dump(url)
+                Task {
+                    do {
+                        try await FirefoxPlugin.install(from: url)
+                    } catch {
+                        assertionFailure(error.localizedDescription)
+                    }
+                }
             }
             downloadDestinationURL = nil
         }
