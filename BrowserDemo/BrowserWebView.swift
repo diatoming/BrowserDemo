@@ -57,6 +57,9 @@ extension BrowserWebView {
         func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
             if navigationResponse.canShowMIMEType {
                 decisionHandler(.allow)
+                if let url = webView.url {
+                    TopSitesManager.shared.update(site: url.absoluteString)
+                }
             } else {
                 decisionHandler(.download)
             }
@@ -115,16 +118,9 @@ extension BrowserWebView {
                 link.innerHTML = "Add to Orion";
                 link.style.color = 'white';
                 """
-                
-                webView.evaluateJavaScript(js) { result, err in
-                }
+                webView.evaluateJavaScript(js) { _, _ in }
             }
         }
-        
-        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-//            assertionFailure(error.localizedDescription)
-        }
-        
     }
 }
 

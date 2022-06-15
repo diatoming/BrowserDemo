@@ -14,6 +14,7 @@
 		1F629EBF285849130040DE61 /* BrowserWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EBE285849130040DE61 /* BrowserWebView.swift */; };
 		1F629EC1285954230040DE61 /* FirefoxPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EC0285954230040DE61 /* FirefoxPlugin.swift */; };
 		1F629EC4285965150040DE61 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F629EC3285965150040DE61 /* ZIPFoundation */; };
+		1F629EC62859E5BD0040DE61 /* TopSitesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1F629EB8285842670040DE61 /* BrowserDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserDemo.entitlements; sourceTree = "<group>"; };
 		1F629EBE285849130040DE61 /* BrowserWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserWebView.swift; sourceTree = "<group>"; };
 		1F629EC0285954230040DE61 /* FirefoxPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirefoxPlugin.swift; sourceTree = "<group>"; };
+		1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSitesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				1F629EAF285842660040DE61 /* BrowserDemoApp.swift */,
 				1F629EB1285842660040DE61 /* ContentView.swift */,
 				1F629EBE285849130040DE61 /* BrowserWebView.swift */,
+				1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */,
 				1F629EC0285954230040DE61 /* FirefoxPlugin.swift */,
 				1F629EB3285842670040DE61 /* Assets.xcassets */,
 				1F629EB8285842670040DE61 /* BrowserDemo.entitlements */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F629EB2285842660040DE61 /* ContentView.swift in Sources */,
+				1F629EC62859E5BD0040DE61 /* TopSitesManager.swift in Sources */,
 				1F629EC1285954230040DE61 /* FirefoxPlugin.swift in Sources */,
 				1F629EBF285849130040DE61 /* BrowserWebView.swift in Sources */,
 				1F629EB0285842660040DE61 /* BrowserDemoApp.swift in Sources */,
