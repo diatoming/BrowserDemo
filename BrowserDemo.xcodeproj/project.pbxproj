@@ -15,6 +15,8 @@
 		1F629EC1285954230040DE61 /* FirefoxPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EC0285954230040DE61 /* FirefoxPlugin.swift */; };
 		1F629EC4285965150040DE61 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1F629EC3285965150040DE61 /* ZIPFoundation */; };
 		1F629EC62859E5BD0040DE61 /* TopSitesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */; };
+		1F629EC9285ACF320040DE61 /* BrowserDemo.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F629EC7285ACF320040DE61 /* BrowserDemo.md */; };
+		1F629ECA285ACF320040DE61 /* mainWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F629EC8285ACF320040DE61 /* mainWindow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		1F629EBE285849130040DE61 /* BrowserWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserWebView.swift; sourceTree = "<group>"; };
 		1F629EC0285954230040DE61 /* FirefoxPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirefoxPlugin.swift; sourceTree = "<group>"; };
 		1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSitesManager.swift; sourceTree = "<group>"; };
+		1F629EC7285ACF320040DE61 /* BrowserDemo.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = BrowserDemo.md; sourceTree = SOURCE_ROOT; };
+		1F629EC8285ACF320040DE61 /* mainWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainWindow.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +64,15 @@
 		1F629EAE285842660040DE61 /* BrowserDemo */ = {
 			isa = PBXGroup;
 			children = (
-				1F629EAF285842660040DE61 /* BrowserDemoApp.swift */,
-				1F629EB1285842660040DE61 /* ContentView.swift */,
-				1F629EBE285849130040DE61 /* BrowserWebView.swift */,
-				1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */,
-				1F629EC0285954230040DE61 /* FirefoxPlugin.swift */,
-				1F629EB3285842670040DE61 /* Assets.xcassets */,
 				1F629EB8285842670040DE61 /* BrowserDemo.entitlements */,
+				1F629EC7285ACF320040DE61 /* BrowserDemo.md */,
+				1F629EC8285ACF320040DE61 /* mainWindow.png */,
+				1F629EAF285842660040DE61 /* BrowserDemoApp.swift */,
+				1F629EBE285849130040DE61 /* BrowserWebView.swift */,
+				1F629EB1285842660040DE61 /* ContentView.swift */,
+				1F629EC0285954230040DE61 /* FirefoxPlugin.swift */,
+				1F629EC52859E5BD0040DE61 /* TopSitesManager.swift */,
+				1F629EB3285842670040DE61 /* Assets.xcassets */,
 				1F629EB5285842670040DE61 /* Preview Content */,
 			);
 			path = BrowserDemo;
@@ -144,7 +150,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F629EC9285ACF320040DE61 /* BrowserDemo.md in Resources */,
 				1F629EB7285842670040DE61 /* Preview Assets.xcassets in Resources */,
+				1F629ECA285ACF320040DE61 /* mainWindow.png in Resources */,
 				1F629EB4285842670040DE61 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
