@@ -8,11 +8,12 @@
 import SwiftUI
 import WebKit
 
+/// WKWebView wrapper
 struct BrowserWebView: NSViewRepresentable {
     
     @Binding var url: URL?
     @Binding var goBackHandler: (() -> Void)?
-
+    
     func makeNSView(context: Context) -> WKWebView {
         
         let config = WKWebViewConfiguration()
@@ -42,9 +43,10 @@ struct BrowserWebView: NSViewRepresentable {
     }
 }
 
+// MARK: - Coordinator
 extension BrowserWebView {
     class BrowserWebViewCoordinator: NSObject, WKNavigationDelegate, WKDownloadDelegate {
-                
+        
         var parent: BrowserWebView
         private var downloadDestinationURL: URL?
         
@@ -55,10 +57,10 @@ extension BrowserWebView {
         // MARK: - Download
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
             if navigationAction.shouldPerformDownload {
-                   decisionHandler(.download, preferences)
-               } else {
-                   decisionHandler(.allow, preferences)
-               }
+                decisionHandler(.download, preferences)
+            } else {
+                decisionHandler(.allow, preferences)
+            }
         }
         
         func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
@@ -99,7 +101,7 @@ extension BrowserWebView {
         
         func downloadDidFinish(_ download: WKDownload) {
             if let url = downloadDestinationURL {
-                dump(url)
+                // install plugin
                 Task {
                     do {
                         try await FirefoxPlugin.install(from: url)
@@ -113,13 +115,16 @@ extension BrowserWebView {
         
         // MARK: - Navigation
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            
+            // set window tab title
             webView.window?.title = webView.title ?? ""
             
+            // modify buttons with JavaScript
             if let url = webView.url, url.absoluteString.isFirefoxAddonsSite {
                 let js = """
                 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
                 remove(".GetFirefoxButton");
-
+                
                 var link = document.getElementsByClassName('InstallButtonWrapper-download-link')[0];
                 link.classList.remove('InstallButtonWrapper-download-link');
                 link.classList.add('Button', 'Button--action', 'GetFirefoxButton-button', 'Button--puffy');

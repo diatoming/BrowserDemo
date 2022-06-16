@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Manage top sites data
+// TODO: Data currently saved in UserDefaults, should change to sqlite in production
 class TopSitesManager {
     static let shared = TopSitesManager()
     
