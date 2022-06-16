@@ -15,17 +15,14 @@ struct ContentView: View {
     @State private var plugin: FirefoxPlugin?
     
     @State private var showTopSitesPopover = false
-    
-    @State private var window: NSWindow?
-    
+        
     @State var goBack: (() -> Void)?
     
     var body: some View {
         VStack {
-            BrowserWebView(url: $url, window: $window, goBackHandler: $goBack)
+            BrowserWebView(url: $url, goBackHandler: $goBack)
         }
         .presentedWindowToolbarStyle(.expanded)
-        .background(WindowAccessor(window: $window))
         .toolbar {
             ToolbarItemGroup {
                 

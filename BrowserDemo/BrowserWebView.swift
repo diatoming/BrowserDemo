@@ -11,7 +11,6 @@ import WebKit
 struct BrowserWebView: NSViewRepresentable {
     
     @Binding var url: URL?
-    @Binding var window: NSWindow?
     @Binding var goBackHandler: (() -> Void)?
 
     func makeNSView(context: Context) -> WKWebView {
@@ -114,7 +113,7 @@ extension BrowserWebView {
         
         // MARK: - Navigation
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            parent.window?.title = webView.title ?? ""
+            webView.window?.title = webView.title ?? ""
             
             if let url = webView.url, url.absoluteString.isFirefoxAddonsSite {
                 let js = """
