@@ -65,7 +65,10 @@ struct FirefoxPlugin {
         var destinationURL = URL(fileURLWithPath: currentWorkingPath)
         destinationURL.appendPathComponent("\(name) unzip")
         do {
-            try fileManager.removeItem(at: destinationURL)
+            if fileManager.fileExists(atPath: destinationURL.path) {
+                try fileManager.removeItem(at: destinationURL)
+            }
+            
             try fileManager.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
             try fileManager.unzipItem(at: sourceURL, to: destinationURL)
             return destinationURL

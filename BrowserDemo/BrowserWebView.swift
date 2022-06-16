@@ -89,7 +89,9 @@ extension BrowserWebView {
             downloadDestinationURL = url
             
             // remove old download is needed
-            try! FileManager.default.removeItem(at: url)
+            if FileManager.default.fileExists(atPath: url.path) {
+                try! FileManager.default.removeItem(at: url)
+            }
             
             return downloadDestinationURL
         }
