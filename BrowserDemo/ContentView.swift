@@ -16,14 +16,23 @@ struct ContentView: View {
     
     @State private var showTopSitesPopover = false
     
+    @State private var window: NSWindow?
+
     var body: some View {
         VStack {
-            BrowserWebView(url: $url)
+            BrowserWebView(url: $url, window: $window)
         }
-        .frame(idealWidth: 800, maxWidth: .infinity, idealHeight: 680, maxHeight: .infinity)
         .presentedWindowToolbarStyle(.expanded)
+        .background(WindowAccessor(window: $window))
         .toolbar {
             ToolbarItemGroup {
+                
+                Button {
+                    
+                } label: {
+                    Label("Back", systemImage: "arrow.backward")
+                }
+                
                 Spacer()
                 TextField("", text: $urlString)
                     .frame(minWidth: 500)
