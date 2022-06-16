@@ -17,10 +17,12 @@ struct ContentView: View {
     @State private var showTopSitesPopover = false
     
     @State private var window: NSWindow?
-
+    
+    @State var goBack: (() -> Void)?
+    
     var body: some View {
         VStack {
-            BrowserWebView(url: $url, window: $window)
+            BrowserWebView(url: $url, window: $window, goBackHandler: $goBack)
         }
         .presentedWindowToolbarStyle(.expanded)
         .background(WindowAccessor(window: $window))
@@ -28,7 +30,7 @@ struct ContentView: View {
             ToolbarItemGroup {
                 
                 Button {
-                    
+                    goBack?()
                 } label: {
                     Label("Back", systemImage: "arrow.backward")
                 }

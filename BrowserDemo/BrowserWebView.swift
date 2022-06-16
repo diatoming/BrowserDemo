@@ -12,7 +12,8 @@ struct BrowserWebView: NSViewRepresentable {
     
     @Binding var url: URL?
     @Binding var window: NSWindow?
-    
+    @Binding var goBackHandler: (() -> Void)?
+
     func makeNSView(context: Context) -> WKWebView {
         
         let config = WKWebViewConfiguration()
@@ -21,6 +22,12 @@ struct BrowserWebView: NSViewRepresentable {
         
         // disable webview background color
         wv.setValue(false, forKey: "drawsBackground")
+        
+        DispatchQueue.main.async {
+            goBackHandler = {
+                wv.goBack()
+            }
+        }
         
         return wv
     }
